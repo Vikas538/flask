@@ -1,11 +1,10 @@
 from app import db
 
 class Customer(db.Model):
-    __tablename__ = 'customer'
+    __tablename__ = 'customers'
 
     id = db.Column(db.String, primary_key=True, unique=True, default=db.func.cuid())
-    company_id = db.Column(db.String)
-    number = db.Column(db.String)
+    company_id = db.Column(db.String, db.ForeignKey('company.id'))
     name = db.Column(db.String)
     email = db.Column(db.String)
     address = db.Column(db.String)
@@ -40,6 +39,6 @@ class Customer(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    company = db.relationship('Company', backref='customers', lazy=True)
-    processed_actions = db.relationship('ProcessedAction', backref='customer', lazy=True)
-    sessions = db.relationship('Session', backref='customer', lazy=True)
+    company = db.relationship('company', backref='customers', lazy=True)
+    processed_actions = db.relationship('processed_actions', backref='customers', lazy=True)
+    sessions = db.relationship('sessions', backref='customers', lazy=True)

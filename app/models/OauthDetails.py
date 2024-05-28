@@ -1,6 +1,7 @@
 from app import db
 
 class OauthDetail(db.Model):
+    __table_name = "oauth_details"
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     email = db.Column(db.String)
     oauth_token = db.Column(db.JSON)

@@ -1,5 +1,7 @@
 from app import db
-from enums.enums import AssistantTypeEnum, LLMSEnum
+from .enums.enums import AssistantTypeEnum, LLMSEnum
+from sqlalchemy import ARRAY,String
+from sqlalchemy import Enum
 class BasePlan(db.Model):
     __tablename__ = 'base_plan'
 
@@ -11,7 +13,7 @@ class BasePlan(db.Model):
     no_of_emails_per_month = db.Column(db.Integer)
     no_of_minutes_per_day = db.Column(db.Integer)
     no_of_calls_per_month = db.Column(db.Integer)
-    llms = db.Column(db.ARRAY(LLMSEnum))
+    llms = db.Column(ARRAY(String)) 
     max_allowed_token = db.Column(db.Integer)
     max_number_of_kb = db.Column(db.Integer)
     max_number_of_action = db.Column(db.Integer)

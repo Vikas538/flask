@@ -19,12 +19,12 @@ def create_app():
 
     # Import and register blueprints inside the create_app function
     from .controllers.users_controller import user_bp
-    from .controllers.posts_controller import post_bp
+    # from .controllers.posts_controller import post_bp
 
     app.register_blueprint(user_bp)
-    app.register_blueprint(post_bp)
+    # app.register_blueprint(post_bp)
 
     return app
 
 # Import models here to avoid circular imports
-from app.models import user_model, posts_model
+from app.models import *

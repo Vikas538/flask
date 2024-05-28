@@ -1,9 +1,10 @@
 from app import db
-from enums.enums import RequestTypeEnum
+from .enums.enums import RequestTypeEnum
 
-class Request(db.Model):
+class requests(db.Model):
+    __tablename__ = "requests"
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
-    method = db.Column(db.Enum(RequestTypeEnum))
+    method = db.Column(db.Enum(RequestTypeEnum,name='RequestTypeEnum'))
     url = db.Column(db.String)
     headers = db.Column(db.JSON)
     query_params = db.Column(db.JSON)
@@ -14,4 +15,4 @@ class Request(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
-    user_meta_data = db.relationship('UserMetaData', backref=db.backref('requests', lazy=True))
+    user_meta_data = db.relationship('user_meta_data', backref=db.backref('requests', lazy=True))

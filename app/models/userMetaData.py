@@ -1,9 +1,9 @@
 from app import db
 class UserMetaData(db.Model):
-    __tablename__ = 'user_metadata'
+    __tablename__ = 'user_meta_data'
 
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
-    user_id = db.Column(db.String, nullable=False)
+    user_id = db.Column(db.String(36), db.ForeignKey('user.id'), nullable=False)
     ip_address = db.Column(db.String)
     login_time = db.Column(db.DateTime)
     logout_time = db.Column(db.DateTime)
@@ -11,5 +11,5 @@ class UserMetaData(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
-    user = db.relationship('User', backref=db.backref('user_metadata', lazy=True))
-    requests = db.relationship('Request', backref=db.backref('user_metadata', lazy=True))
+    user = db.relationship('user', backref=db.backref('user_meta_data', lazy=True))
+    requests = db.relationship('request', backref=db.backref('user_meta_data', lazy=True))
